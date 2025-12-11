@@ -239,7 +239,7 @@ const AmbientLight = () => (
 
 const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => (
   <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[1600px]">
-    <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-8 py-5 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden">
+    <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-8 py-3 md:py-5 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden">
 
       {/* Glossy effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
@@ -512,7 +512,7 @@ const CatalogView = ({ onProductSelect }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
         <AnimatePresence mode='popLayout'>
           {filteredProducts.map((product) => (
             <motion.div
@@ -522,7 +522,7 @@ const CatalogView = ({ onProductSelect }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -20 }}
               onClick={() => onProductSelect(product)}
-              className="group cursor-pointer relative h-[500px] rounded-[2.5rem] overflow-hidden border border-white/5 bg-zinc-900"
+              className="group cursor-pointer relative h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/5 bg-zinc-900"
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
