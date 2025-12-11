@@ -15,7 +15,7 @@ const PRODUCTS = [
     name: "Vision Pro",
     category: "Spatial",
     price: 349990,
-    image: "/images/vision-pro.png",
+    image: import.meta.env.BASE_URL + "images/vision-pro.png",
     tag: "Future",
     description: "Пространственный компьютер, который меняет всё. Работайте, играйте и общайтесь в смешанной реальности с невероятным разрешением."
   },
@@ -42,7 +42,7 @@ const PRODUCTS = [
     name: "MacBook Air",
     category: "Laptop",
     price: 149990,
-    image: "/images/macbook.png",
+    image: import.meta.env.BASE_URL + "images/macbook.png",
     tag: "M3 Chip",
     description: "Тонкий. Легкий. Мощный. Работает до 18 часов без подзарядки. Идеален для креатива."
   },
@@ -69,7 +69,7 @@ const PRODUCTS = [
     name: "Leica M11",
     category: "Camera",
     price: 849990,
-    image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/leica-m11.png",
     tag: "Legendary",
     description: "Легендарное качество снимков в компактном корпусе. Для тех, кто видит мир иначе."
   },
@@ -78,7 +78,7 @@ const PRODUCTS = [
     name: "Console 5",
     category: "Gaming",
     price: 64990,
-    image: "https://images.unsplash.com/photo-1486401899868-0e435ed85128?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/console-5.png",
     tag: "Next Gen",
     description: "Погрузитесь в игровые миры с трассировкой лучей и мгновенными загрузками."
   },
@@ -87,7 +87,7 @@ const PRODUCTS = [
     name: "Mech Key Pro",
     category: "Accessory",
     price: 18990,
-    image: "/images/mech-keyboard.png",
+    image: import.meta.env.BASE_URL + "images/mech-keyboard.png",
     tag: "Custom",
     description: "Механическая клавиатура с горячей заменой свитчей. Тайпинг, от которого невозможно оторваться."
   },
@@ -96,7 +96,7 @@ const PRODUCTS = [
     name: "Smart Speaker Home",
     category: "Audio",
     price: 29990,
-    image: "https://images.unsplash.com/photo-1589492477829-5e65395b66cc?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/smart-speaker.png",
     tag: "Hi-Fi",
     description: "Наполните дом музыкой. Умный помощник и потрясающее качество звука в одном устройстве."
   },
@@ -105,7 +105,7 @@ const PRODUCTS = [
     name: "Gaming Mouse Alpha",
     category: "Gaming",
     price: 12990,
-    image: "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/gaming-mouse.png",
     tag: "25K DPI",
     description: "Сверхлегкая игровая мышь с сенсором нового поколения. Точность, которая решает."
   },
@@ -114,7 +114,7 @@ const PRODUCTS = [
     name: "UltraWide 49\"",
     category: "Monitor",
     price: 159990,
-    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/ultrawide-monitor.png",
     tag: "Immersive",
     description: "Замените два монитора одним. Невероятный изгиб и частота обновления 240 Гц."
   },
