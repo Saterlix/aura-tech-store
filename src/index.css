@@ -32,10 +32,6 @@
   }
 }
 
-body {
-  background: #050505;
-}
-
 /* Global Scrollbar Hide - Aggressive */
 * {
   -ms-overflow-style: none !important;
@@ -49,6 +45,24 @@ body {
   display: none !important;
 }
 
+:root {
+  --bg-main: #050505;
+  --bg-card: #09090b;
+  /* zinc-950/900-ish */
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
+  /* zinc-400 */
+}
+
+[data-theme='light'] {
+  --bg-main: #e4e4e7;
+  /* zinc-200 */
+  --bg-card: #ffffff;
+  --text-main: #000000;
+  --text-muted: #52525b;
+  /* zinc-600 */
+}
+
 html,
 body {
   margin: 0;
@@ -59,6 +73,12 @@ body {
   width: 100%;
   overscroll-behavior: none;
   /* Prevent bounce effect */
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {

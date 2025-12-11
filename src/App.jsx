@@ -5,8 +5,69 @@ import {
   Aperture, ShoppingBag, ArrowRight, ArrowUpRight,
   Headphones, Smartphone, ShieldCheck, ChevronLeft,
   Star, Search, Menu, X, Plus, Minus, Trash2,
-  Camera, Gamepad2, Plane, Keyboard, Speaker
+  Camera, Gamepad2, Plane, Keyboard, Speaker, Globe, Sun, Moon
 } from 'lucide-react';
+
+const TRANSLATIONS = {
+  ru: {
+    home: "Главная",
+    catalog: "Каталог",
+    vision: "Вижн",
+    about: "О нас",
+    support: "Поддержка",
+    back: "Назад",
+    toCatalog: "В каталог",
+    store: "Магазин",
+    cart: "Корзина",
+    emptyCart: "Корзина пуста, подруга! 🛍️",
+    checkout: "Оформить",
+    total: "Итого",
+    addToCart: "В корзину",
+    newDrop: "New Drop 2025",
+    collection: "Коллекция",
+    collectionDesc: "Выбирай лучшее. Каждое устройство здесь — произведение искусства. 🎨",
+    flagship: "Флагман",
+    bestseller: "Хит",
+    rating: "Рейтинг",
+    inStock: "В наличии",
+    warranty: "2 года гарантии",
+    shipping: "Бесплатная доставка",
+    aiGreeting: "Привет! 👋 Я AI-помощник Aura. Чем могу помочь с выбором гаджетов?",
+    pureArt: "Pure",
+    pureTech: "Pure",
+    art: "Art.",
+    tech: "Tech.",
+  },
+  en: {
+    home: "Home",
+    catalog: "Catalog",
+    vision: "Vision",
+    about: "About",
+    support: "Support",
+    back: "Back",
+    toCatalog: "To Catalog",
+    store: "Store",
+    cart: "Cart",
+    emptyCart: "Your bag is empty, bestie! 🛍️",
+    checkout: "Checkout",
+    total: "Total",
+    addToCart: "Add to Cart",
+    newDrop: "New Drop 2025",
+    collection: "Collection",
+    collectionDesc: "Choose the best. Every device here is a work of art. 🎨",
+    flagship: "Flagship",
+    bestseller: "Bestseller",
+    rating: "Rating",
+    inStock: "In Stock",
+    warranty: "2 Year Warranty",
+    shipping: "Free Shipping",
+    aiGreeting: "Hi! 👋 I'm Aura AI assistant. How can I help you choose gadgets?",
+    pureArt: "Pure",
+    pureTech: "Pure",
+    art: "Art.",
+    tech: "Tech.",
+  }
+};
 
 /* --- Mock Data with RELIABLE HD Images --- */
 const PRODUCTS = [
@@ -17,7 +78,8 @@ const PRODUCTS = [
     price: 349990,
     image: import.meta.env.BASE_URL + "images/vision-pro.png",
     tag: "Future",
-    description: "Пространственный компьютер, который меняет всё. Работайте, играйте и общайтесь в смешанной реальности с невероятным разрешением."
+    description: "Пространственный компьютер, который меняет всё. Работайте, играйте и общайтесь в смешанной реальности с невероятным разрешением.",
+    description_en: "A spatial computer that changes everything. Work, play, and connect in mixed reality with incredible resolution."
   },
   {
     id: 2,
@@ -26,7 +88,8 @@ const PRODUCTS = [
     price: 54990,
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000",
     tag: "Top Rated",
-    description: "Студийный звук у вас дома. Активное шумоподавление нового поколения и режим прозрачности."
+    description: "Студийный звук у вас дома. Активное шумоподавление нового поколения и режим прозрачности.",
+    description_en: "Studio sound at home. Next-generation active noise cancellation and transparency mode."
   },
   {
     id: 3,
@@ -35,7 +98,8 @@ const PRODUCTS = [
     price: 119990,
     image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&q=80&w=1000",
     tag: "Titanium",
-    description: "Самый прочный и легкий дизайн из титана. Чип A17 Pro меняет правила игры."
+    description: "Самый прочный и легкий дизайн из титана. Чип A17 Pro меняет правила игры.",
+    description_en: "The strongest and lightest titanium design. The A17 Pro chip changes the game."
   },
   {
     id: 4,
@@ -44,7 +108,8 @@ const PRODUCTS = [
     price: 149990,
     image: import.meta.env.BASE_URL + "images/macbook.png",
     tag: "M3 Chip",
-    description: "Тонкий. Легкий. Мощный. Работает до 18 часов без подзарядки. Идеален для креатива."
+    description: "Тонкий. Легкий. Мощный. Работает до 18 часов без подзарядки. Идеален для креатива.",
+    description_en: "Thin. Light. Powerful. Works up to 18 hours without recharging. Ideal for creativity."
   },
   {
     id: 5,
@@ -237,13 +302,14 @@ const AmbientLight = () => (
   </>
 );
 
-const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => {
+const Navbar = ({ cartCount, onNavigate, activePage, openCart, lang, setLang, theme, setTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const t = TRANSLATIONS[lang];
 
   return (
     <>
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[1600px]">
-        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-8 py-3 md:py-5 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden">
+        <div className="bg-[var(--bg-card)]/60 backdrop-blur-xl border border-[var(--text-main)]/10 rounded-full px-4 md:px-8 py-3 md:py-5 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden transition-colors duration-300">
 
           {/* Glossy effect */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
@@ -253,51 +319,67 @@ const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => {
             onClick={() => activePage === 'product' ? onNavigate('catalog') : onNavigate('home')}
             className="flex items-center gap-3 group relative z-10"
           >
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${activePage === 'product' ? 'bg-white text-black rotate-0' : 'bg-white text-black group-hover:rotate-180'}`}>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${activePage === 'product' ? 'bg-[var(--text-main)] text-[var(--bg-main)] rotate-0' : 'bg-[var(--text-main)] text-[var(--bg-main)] group-hover:rotate-180'}`}>
               {activePage === 'product' ? <ChevronLeft size={24} /> : <Aperture size={22} />}
             </div>
             <div className="flex flex-col items-start leading-none hidden sm:flex">
-              <span className="text-lg font-bold tracking-[0.2em] text-white uppercase transition-all duration-300">
-                {activePage === 'product' ? 'Back' : 'Aura'}
+              <span className="text-lg font-bold tracking-[0.2em] text-[var(--text-main)] uppercase transition-all duration-300">
+                {activePage === 'product' ? t.back : 'Aura'}
               </span>
-              <span className="text-lg text-zinc-400 font-medium tracking-widest text-[9px]">
-                {activePage === 'product' ? 'TO CATALOG' : 'STORE'}
+              <span className="text-lg text-[var(--text-muted)] font-medium tracking-widest text-[9px]">
+                {activePage === 'product' ? t.toCatalog : t.store}
               </span>
             </div>
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2 md:gap-4 lg:gap-8 bg-white/5 rounded-full px-2 py-1 relative z-10 border border-white/5">
+          <div className="hidden md:flex items-center gap-2 md:gap-4 lg:gap-8 bg-[var(--text-main)]/5 rounded-full px-2 py-1 relative z-10 border border-[var(--text-main)]/5">
             {['home', 'catalog', 'vision'].map((page) => (
               <button
                 key={page}
                 onClick={() => onNavigate(page)}
-                className={`px-6 py-2 rounded-full text-xs font-bold transition-all duration-300 uppercase tracking-widest relative overflow-hidden group ${activePage === page ? 'text-black' : 'text-zinc-400 hover:text-white'
+                className={`px-6 py-2 rounded-full text-xs font-bold transition-all duration-300 uppercase tracking-widest relative overflow-hidden group ${activePage === page ? 'text-[var(--bg-main)]' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
                   }`}
               >
                 {activePage === page && (
                   <motion.div
                     layoutId="nav-bg"
-                    className="absolute inset-0 bg-white"
+                    className="absolute inset-0 bg-[var(--text-main)]"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <span className="relative z-10">{page === 'home' ? 'Главная' : page === 'catalog' ? 'Каталог' : 'Вижн'}</span>
+                <span className="relative z-10">{t[page]}</span>
               </button>
             ))}
           </div>
 
           <div className="flex items-center gap-3 relative z-10">
+            {/* Theme Toggle Desktop */}
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="hidden md:flex w-10 h-10 rounded-full bg-[var(--text-main)]/5 items-center justify-center text-[var(--text-main)] hover:bg-[var(--text-main)]/10 transition-colors"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* Lang Toggle Desktop */}
+            <button
+              onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
+              className="hidden md:flex w-10 h-10 rounded-full bg-[var(--text-main)]/5 items-center justify-center text-[var(--text-main)] font-bold text-xs hover:bg-[var(--text-main)]/10 transition-colors"
+            >
+              {lang.toUpperCase()}
+            </button>
+
             {/* Cart Button */}
             <button
               onClick={openCart}
-              className="relative group w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
+              className="relative group w-12 h-12 flex items-center justify-center rounded-full bg-[var(--text-main)]/5 border border-[var(--text-main)]/10 hover:bg-[var(--text-main)]/20 transition-all hover:scale-105 active:scale-95"
             >
-              <ShoppingBag className="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors" />
+              <ShoppingBag className="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--text-main)] transition-colors" />
               {cartCount > 0 && (
                 <motion.div
                   initial={{ scale: 0 }} animate={{ scale: 1 }}
-                  className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center border-2 border-[#0a0a0a]"
+                  className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center border-2 border-[var(--bg-main)]"
                 >
                   <span className="text-[10px] font-bold text-white">{cartCount}</span>
                 </motion.div>
@@ -307,7 +389,7 @@ const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full bg-white text-black transition-all hover:scale-105 active:scale-95"
+              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full bg-[var(--text-main)] text-[var(--bg-main)] transition-all hover:scale-105 active:scale-95"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -322,8 +404,20 @@ const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8"
+            className="fixed inset-0 z-40 bg-[var(--bg-main)]/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8"
           >
+            {/* Mobile Toggles */}
+            <div className="flex gap-6 mb-8">
+              <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--text-main)]/10 text-[var(--text-main)]">
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                <span className="font-bold">{theme === 'dark' ? t.lightMode : t.darkMode}</span>
+              </button>
+              <button onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--text-main)]/10 text-[var(--text-main)]">
+                <Globe size={20} />
+                <span className="font-bold">{lang === 'ru' ? t.english : t.russian}</span>
+              </button>
+            </div>
+
             {['home', 'catalog', 'vision', 'about', 'support'].map((item, idx) => (
               <motion.button
                 key={item}
@@ -336,20 +430,18 @@ const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => {
                   }
                   setIsMenuOpen(false);
                 }}
-                className={`text-4xl font-bold uppercase tracking-tight ${activePage === item ? 'text-white' : 'text-zinc-500 hover:text-white'
+                className={`text-4xl font-bold uppercase tracking-tight ${activePage === item ? 'text-[var(--text-main)]' : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
                   }`}
               >
-                {item === 'home' ? 'Главная' :
-                  item === 'catalog' ? 'Каталог' :
-                    item === 'vision' ? 'Вижн' : item}
+                {t[item] || item}
               </motion.button>
             ))}
 
             <div className="absolute bottom-12 flex gap-6">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-500">
+              <div className="w-12 h-12 rounded-full border border-[var(--text-main)]/10 flex items-center justify-center text-[var(--text-muted)]">
                 <span className="text-xs">IG</span>
               </div>
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-500">
+              <div className="w-12 h-12 rounded-full border border-[var(--text-main)]/10 flex items-center justify-center text-[var(--text-muted)]">
                 <span className="text-xs">TW</span>
               </div>
             </div>
@@ -362,7 +454,8 @@ const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => {
 
 /* --- Views --- */
 
-const HomeView = ({ onNavigate, onProductSelect }) => {
+const HomeView = ({ onNavigate, onProductSelect, lang }) => {
+  const t = TRANSLATIONS[lang];
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -376,20 +469,20 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6"
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--text-main)]/10 bg-[var(--text-main)]/5 backdrop-blur-md mb-6"
         >
           <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-          <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-wider">New Drop 2025</span>
+          <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">{t.newDrop}</span>
         </motion.div>
 
         <motion.h1
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-5xl md:text-7xl lg:text-9xl font-semibold text-white tracking-tighter mb-6 leading-[0.85]"
+          className="text-5xl md:text-7xl lg:text-9xl font-semibold text-[var(--text-main)] tracking-tighter mb-6 leading-[0.85]"
         >
-          Pure <span className="text-zinc-700 font-serif italic">Art.</span><br />
-          Pure <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 animate-gradient-x">Tech.</span>
+          {t.pureArt} <span className="text-[var(--text-muted)] font-serif italic">{t.art}</span><br />
+          {t.pureTech} <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 animate-gradient-x">{t.tech}</span>
         </motion.h1>
 
         <motion.div
@@ -400,9 +493,9 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
         >
           <button
             onClick={() => onNavigate('catalog')}
-            className="group px-8 py-4 rounded-full bg-white text-black text-sm font-bold tracking-wide hover:bg-zinc-200 transition-all hover:px-10 flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            className="group px-8 py-4 rounded-full bg-[var(--text-main)] text-[var(--bg-main)] text-sm font-bold tracking-wide hover:bg-[var(--text-muted)] transition-all hover:px-10 flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
           >
-            В каталог
+            {t.toCatalog}
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </button>
         </motion.div>
@@ -414,7 +507,7 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[0])}
-          className="group md:col-span-4 cursor-pointer relative rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/10"
+          className="group md:col-span-4 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -422,21 +515,21 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
               alt="Vision Pro"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-[var(--bg-main)]/40 to-transparent" />
           </div>
 
           <div className="relative z-10 p-8 h-full flex flex-col justify-between">
             <div className="flex justify-between items-start">
-              <span className="px-3 py-1 rounded-full border border-white/20 text-[10px] bg-black/50 backdrop-blur-md uppercase tracking-widest text-white">
-                Flagship
+              <span className="px-3 py-1 rounded-full border border-[var(--text-main)]/20 text-[10px] bg-[var(--bg-main)]/50 backdrop-blur-md uppercase tracking-widest text-[var(--text-main)]">
+                {t.flagship}
               </span>
-              <div className="w-12 h-12 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+              <div className="w-12 h-12 rounded-full border border-[var(--text-main)]/20 bg-[var(--bg-main)]/30 backdrop-blur-md flex items-center justify-center group-hover:bg-[var(--text-main)] group-hover:text-[var(--bg-main)] transition-all">
                 <ArrowUpRight size={20} />
               </div>
             </div>
             <div>
-              <h3 className="text-4xl font-medium text-white mb-2 tracking-tight">Vision Pro</h3>
-              <p className="text-zinc-300">Измени свой взгляд на реальность.</p>
+              <h3 className="text-4xl font-medium text-[var(--text-main)] mb-2 tracking-tight">Vision Pro</h3>
+              <p className="text-[var(--text-muted)]">{lang === 'ru' ? PRODUCTS[0].description : PRODUCTS[0].description_en}</p>
             </div>
           </div>
         </motion.div>
@@ -445,7 +538,7 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[1])}
-          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/10"
+          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -453,12 +546,12 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
               alt="Headphones"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-transparent to-transparent" />
           </div>
 
           <div className="relative z-10 p-8 h-full flex flex-col justify-end">
-            <h3 className="text-2xl font-medium text-white">Audio Max</h3>
-            <p className="text-sm text-zinc-400">Почувствуй бас.</p>
+            <h3 className="text-2xl font-medium text-[var(--text-main)]">Audio Max</h3>
+            <p className="text-sm text-[var(--text-muted)]">{t.rating}</p>
           </div>
         </motion.div>
 
@@ -466,7 +559,7 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[2])}
-          className="group md:col-span-2 md:row-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/10"
+          className="group md:col-span-2 md:row-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -474,17 +567,17 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
               alt="Phone"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-transparent to-transparent" />
           </div>
 
           <div className="relative z-10 p-8 h-full flex flex-col justify-between">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-              <span className="text-xs font-bold text-orange-400 uppercase tracking-widest">Bestseller</span>
+              <span className="text-xs font-bold text-orange-400 uppercase tracking-widest">{t.bestseller}</span>
             </div>
             <div>
-              <h3 className="text-3xl font-medium text-white tracking-tight">iPhone 15 Pro</h3>
-              <p className="text-sm text-zinc-300 mt-2">Titanium. Perfection.</p>
+              <h3 className="text-3xl font-medium text-[var(--text-main)] tracking-tight">iPhone 15 Pro</h3>
+              <p className="text-sm text-[var(--text-muted)] mt-2">Titanium. Perfection.</p>
             </div>
           </div>
         </motion.div>
@@ -493,7 +586,7 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[5])}
-          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/10"
+          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -501,12 +594,12 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
               alt="Drone"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-main)]/20 to-[var(--bg-main)]/80" />
           </div>
           <div className="relative z-10 p-8 h-full flex items-end">
             <div>
-              <h3 className="text-xl font-medium text-white">Sky Drone</h3>
-              <p className="text-xs text-zinc-400">4K Video</p>
+              <h3 className="text-xl font-medium text-[var(--text-main)]">Sky Drone</h3>
+              <p className="text-xs text-[var(--text-muted)]">4K Video</p>
             </div>
           </div>
         </motion.div>
@@ -515,7 +608,7 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[6])}
-          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/10"
+          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -523,14 +616,14 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
               alt="Camera"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)]/90 to-transparent" />
           </div>
           <div className="relative z-10 p-8 h-full flex items-end justify-between">
             <div>
-              <h3 className="text-xl font-medium text-white">Leica M11</h3>
-              <p className="text-xs text-zinc-400">Pure Photography</p>
+              <h3 className="text-xl font-medium text-[var(--text-main)]">Leica M11</h3>
+              <p className="text-xs text-[var(--text-muted)]">Pure Photography</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+            <div className="w-10 h-10 rounded-full bg-[var(--text-main)] text-[var(--bg-main)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
               <Plus size={20} />
             </div>
           </div>
@@ -540,8 +633,9 @@ const HomeView = ({ onNavigate, onProductSelect }) => {
   );
 };
 
-const CatalogView = ({ onProductSelect }) => {
+const CatalogView = ({ onProductSelect, lang }) => {
   const [filter, setFilter] = useState('All');
+  const t = TRANSLATIONS[lang];
   // Dynamic categories from products
   const categories = ['All', ...new Set(PRODUCTS.map(p => p.category))];
 
@@ -558,8 +652,8 @@ const CatalogView = ({ onProductSelect }) => {
     >
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
         <div>
-          <h2 className="text-5xl font-semibold text-white mb-4 tracking-tight">Коллекция</h2>
-          <p className="text-zinc-500 max-w-md text-lg">Выбирай лучшее. Каждое устройство здесь — произведение искусства. 🎨</p>
+          <h2 className="text-5xl font-semibold text-[var(--text-main)] mb-4 tracking-tight">{t.collection}</h2>
+          <p className="text-[var(--text-muted)] max-w-md text-lg">{t.collectionDesc}</p>
         </div>
 
         <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 md:overflow-visible md:flex-wrap md:justify-end w-full md:w-auto -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
@@ -568,8 +662,8 @@ const CatalogView = ({ onProductSelect }) => {
               key={cat}
               onClick={() => setFilter(cat)}
               className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all border ${filter === cat
-                ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.4)]'
-                : 'bg-black/20 border-white/10 text-zinc-400 hover:border-white/30 hover:text-white backdrop-blur-sm'
+                ? 'bg-[var(--text-main)] text-[var(--bg-main)] border-[var(--text-main)] shadow-[0_0_15px_rgba(255,255,255,0.4)]'
+                : 'bg-[var(--bg-card)]/50 border-[var(--text-main)]/10 text-[var(--text-muted)] hover:border-[var(--text-main)]/30 hover:text-[var(--text-main)] backdrop-blur-sm'
                 }`}
             >
               {cat}
@@ -588,7 +682,7 @@ const CatalogView = ({ onProductSelect }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -20 }}
               onClick={() => onProductSelect(product)}
-              className="group cursor-pointer relative h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/5 bg-zinc-900"
+              className="group cursor-pointer relative h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-[var(--text-main)]/10 bg-[var(--bg-card)]"
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
@@ -597,25 +691,25 @@ const CatalogView = ({ onProductSelect }) => {
                   alt={product.name}
                   className="w-full h-full object-cover opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-[var(--bg-main)]/50 to-transparent" />
               </div>
 
               {/* Content Overlay */}
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-between">
                 <div className="flex justify-between items-start">
-                  <span className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest text-zinc-300">
+                  <span className="px-3 py-1 rounded-full bg-[var(--bg-main)]/40 backdrop-blur-xl border border-[var(--text-main)]/10 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
                     {product.tag}
                   </span>
-                  <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors transform group-hover:rotate-45 duration-300">
+                  <button className="w-10 h-10 rounded-full bg-[var(--text-main)]/10 backdrop-blur-md flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-main)] transition-colors transform group-hover:rotate-45 duration-300">
                     <ArrowUpRight size={18} />
                   </button>
                 </div>
 
                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-xl md:text-3xl font-medium text-white mb-2">{product.name}</h3>
+                  <h3 className="text-xl md:text-3xl font-medium text-[var(--text-main)] mb-2">{product.name}</h3>
                   <div className="flex items-center justify-between">
-                    <p className="text-zinc-400 font-medium">{product.category}</p>
-                    <span className="text-lg font-bold text-white">{product.price.toLocaleString()}₽</span>
+                    <p className="text-[var(--text-muted)] font-medium">{product.category}</p>
+                    <span className="text-lg font-bold text-[var(--text-main)]">{product.price.toLocaleString()}₽</span>
                   </div>
                 </div>
               </div>
@@ -627,7 +721,8 @@ const CatalogView = ({ onProductSelect }) => {
   );
 };
 
-const ProductDetail = ({ product, onBack, onAddToCart }) => {
+const ProductDetail = ({ product, onBack, onAddToCart, lang }) => {
+  const t = TRANSLATIONS[lang];
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -650,16 +745,16 @@ const ProductDetail = ({ product, onBack, onAddToCart }) => {
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
           />
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-[var(--bg-main)]/40 to-transparent" />
 
           {/* Floating tags */}
           <div className="absolute bottom-8 left-8 flex gap-4">
-            <div className="px-4 py-2 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/10 text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+            <div className="px-4 py-2 rounded-2xl bg-[var(--bg-main)]/50 backdrop-blur-xl border border-[var(--text-main)]/10 text-[var(--text-main)] text-xs font-bold uppercase tracking-widest flex items-center gap-2">
               <Star size={12} className="text-yellow-500 fill-current" />
-              4.9 Rating
+              4.9 {t.rating}
             </div>
-            <div className="px-4 py-2 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/10 text-white text-xs font-bold uppercase tracking-widest">
-              In Stock
+            <div className="px-4 py-2 rounded-2xl bg-[var(--bg-main)]/50 backdrop-blur-xl border border-[var(--text-main)]/10 text-[var(--text-main)] text-xs font-bold uppercase tracking-widest">
+              {t.inStock}
             </div>
           </div>
         </motion.div>
@@ -672,21 +767,21 @@ const ProductDetail = ({ product, onBack, onAddToCart }) => {
             transition={{ delay: 0.4 }}
           >
             <span className="text-rose-500 font-bold tracking-widest uppercase text-sm mb-4 block">{product.category} Series</span>
-            <h1 className="text-6xl md:text-7xl font-semibold text-white tracking-tighter mb-6">{product.name}</h1>
-            <p className="text-3xl text-white font-light mb-8">{product.price.toLocaleString()}₽</p>
+            <h1 className="text-6xl md:text-7xl font-semibold text-[var(--text-main)] tracking-tighter mb-6">{product.name}</h1>
+            <p className="text-3xl text-[var(--text-main)] font-light mb-8">{product.price.toLocaleString()}₽</p>
 
             <div className="space-y-6 mb-12">
-              <p className="text-zinc-400 leading-relaxed text-lg font-light">
-                {product.description}
+              <p className="text-[var(--text-muted)] leading-relaxed text-lg font-light">
+                {lang === 'ru' ? product.description : product.description_en}
               </p>
-              <div className="flex gap-4 text-sm text-zinc-500">
+              <div className="flex gap-4 text-sm text-[var(--text-muted)]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck size={16} />
-                  <span>2 Year Warranty</span>
+                  <span>{t.warranty}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Plane size={16} />
-                  <span>Free Shipping</span>
+                  <span>{t.shipping}</span>
                 </div>
               </div>
             </div>
@@ -694,12 +789,12 @@ const ProductDetail = ({ product, onBack, onAddToCart }) => {
             <div className="flex gap-4">
               <button
                 onClick={() => onAddToCart(product)}
-                className="flex-1 h-16 rounded-full bg-white text-black font-bold text-lg tracking-wide hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]"
+                className="flex-1 h-16 rounded-full bg-[var(--text-main)] text-[var(--bg-main)] font-bold text-lg tracking-wide hover:bg-rose-500 hover:text-white hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]"
               >
                 <ShoppingBag size={20} />
-                В корзину
+                {t.addToCart}
               </button>
-              <button className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/30 transition-all">
+              <button className="w-16 h-16 rounded-full border border-[var(--text-main)]/10 flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--text-main)]/10 hover:border-[var(--text-main)]/30 transition-all">
                 <ArrowUpRight size={24} />
               </button>
             </div>
@@ -710,8 +805,9 @@ const ProductDetail = ({ product, onBack, onAddToCart }) => {
   );
 };
 
-const CartSidebar = ({ isOpen, onClose, items, onRemove }) => {
+const CartSidebar = ({ isOpen, onClose, items, onRemove, lang }) => {
   const total = items.reduce((sum, item) => sum + item.price, 0);
+  const t = TRANSLATIONS[lang];
 
   return (
     <AnimatePresence>
@@ -729,20 +825,20 @@ const CartSidebar = ({ isOpen, onClose, items, onRemove }) => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-[#0a0a0a] border-l border-white/10 z-[70] p-8 flex flex-col shadow-2xl"
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-[var(--bg-card)] border-l border-[var(--text-main)]/10 z-[70] p-8 flex flex-col shadow-2xl"
           >
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-medium text-white">Your Bag <span className="text-rose-500 text-lg">({items.length})</span></h2>
-              <button onClick={onClose} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">
+              <h2 className="text-2xl font-medium text-[var(--text-main)]">{t.cart} <span className="text-rose-500 text-lg">({items.length})</span></h2>
+              <button onClick={onClose} className="w-10 h-10 rounded-full hover:bg-[var(--text-main)]/10 flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">
                 <X size={24} />
               </button>
             </div>
 
             <div className="flex-grow overflow-y-auto space-y-4 pr-2 custom-scrollbar">
               {items.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-zinc-600">
+                <div className="h-full flex flex-col items-center justify-center text-[var(--text-muted)]">
                   <ShoppingBag size={48} className="mb-4 opacity-20" />
-                  <p>Корзина пуста, подруга! 🛍️</p>
+                  <p>{t.emptyCart}</p>
                 </div>
               ) : (
                 items.map((item, idx) => (
@@ -752,19 +848,19 @@ const CartSidebar = ({ isOpen, onClose, items, onRemove }) => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="flex gap-4 p-3 rounded-2xl bg-zinc-900/50 border border-white/5 group hover:border-white/20 transition-colors"
+                    className="flex gap-4 p-3 rounded-2xl bg-[var(--bg-main)]/50 border border-[var(--text-main)]/5 group hover:border-[var(--text-main)]/20 transition-colors"
                   >
                     <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-grow flex flex-col justify-center">
-                      <h4 className="text-white font-medium leading-tight">{item.name}</h4>
-                      <p className="text-zinc-500 text-xs mt-1">{item.category}</p>
-                      <p className="text-white mt-2 font-bold">{item.price.toLocaleString()}₽</p>
+                      <h4 className="text-[var(--text-main)] font-medium leading-tight">{item.name}</h4>
+                      <p className="text-[var(--text-muted)] text-xs mt-1">{item.category}</p>
+                      <p className="text-[var(--text-main)] mt-2 font-bold">{item.price.toLocaleString()}₽</p>
                     </div>
                     <button
                       onClick={() => onRemove(idx)}
-                      className="text-zinc-600 hover:text-rose-500 transition-colors self-center p-2"
+                      className="text-[var(--text-muted)] hover:text-rose-500 transition-colors self-center p-2"
                     >
                       <Trash2 size={18} />
                     </button>
@@ -773,13 +869,13 @@ const CartSidebar = ({ isOpen, onClose, items, onRemove }) => {
               )}
             </div>
 
-            <div className="mt-8 border-t border-white/10 pt-6">
+            <div className="mt-8 border-t border-[var(--text-main)]/10 pt-6">
               <div className="flex justify-between items-end mb-6">
-                <span className="text-zinc-400">Итого:</span>
-                <span className="text-3xl font-bold text-white tracking-tight">{total.toLocaleString()}₽</span>
+                <span className="text-[var(--text-muted)]">{t.total}:</span>
+                <span className="text-3xl font-bold text-[var(--text-main)] tracking-tight">{total.toLocaleString()}₽</span>
               </div>
-              <button className="w-full py-5 bg-white text-black rounded-full font-bold text-lg hover:bg-rose-500 hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
-                Оформить (Checkout)
+              <button className="w-full py-5 bg-[var(--text-main)] text-[var(--bg-main)] rounded-full font-bold text-lg hover:bg-rose-500 hover:text-white transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(244,63,94,0.4)]">
+                {t.checkout}
               </button>
             </div>
           </motion.div>
@@ -965,6 +1061,13 @@ const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [lang, setLang] = useState('ru');
+  const [theme, setTheme] = useState('dark');
+
+  // Update body theme attribute
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
@@ -975,13 +1078,11 @@ const App = () => {
   const handleNavigate = (page) => {
     setActivePage(page);
     setSelectedProduct(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleProductSelect = (product) => {
     setSelectedProduct(product);
     setActivePage('product');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const addToCart = (product) => {
@@ -990,11 +1091,13 @@ const App = () => {
   };
 
   const removeFromCart = (index) => {
-    setCart(cart.filter((_, i) => i !== index));
+    const newCart = [...cart];
+    newCart.splice(index, 1);
+    setCart(newCart);
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-300 font-sans selection:bg-rose-500/30 selection:text-white overflow-x-hidden">
+    <div className={`min-h-screen text-[var(--text-main)] bg-[var(--bg-main)] relative overflow-hidden font-sans selection:bg-rose-500 selection:text-white`}>
       <NoiseBackground />
       <AmbientLight />
 
@@ -1003,66 +1106,74 @@ const App = () => {
         onNavigate={handleNavigate}
         activePage={activePage}
         openCart={() => setIsCartOpen(true)}
+        lang={lang}
+        setLang={setLang}
+        theme={theme}
+        setTheme={setTheme}
       />
 
-      <AnimatePresence mode="wait">
-        {activePage === 'home' && (
-          <HomeView key="home" onNavigate={handleNavigate} onProductSelect={handleProductSelect} />
-        )}
-        {activePage === 'catalog' && (
-          <CatalogView key="catalog" onProductSelect={handleProductSelect} />
-        )}
-        {activePage === 'product' && selectedProduct && (
-          <ProductDetail
-            key="detail"
-            product={selectedProduct}
-            onBack={() => handleNavigate('catalog')}
-            onAddToCart={addToCart}
-          />
-        )}
-        {activePage === 'vision' && (
-          <motion.div
-            key="vision"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="h-screen flex items-center justify-center relative z-10"
+      <div className="relative z-10">
+        <AnimatePresence mode="wait">
+          {activePage === 'home' && (
+            <HomeView key="home" onNavigate={handleNavigate} onProductSelect={handleProductSelect} lang={lang} />
+          )}
+          {activePage === 'catalog' && (
+            <CatalogView key="catalog" onProductSelect={handleProductSelect} lang={lang} />
+          )}
+          {activePage === 'product' && selectedProduct && (
+            <ProductDetail
+              key="detail"
+              product={selectedProduct}
+              onBack={() => handleNavigate('catalog')}
+              onAddToCart={addToCart}
+              lang={lang}
+            />
+          )}
+          {activePage === 'vision' && (
+            <motion.div
+              key="vision"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="h-screen flex items-center justify-center relative z-10"
+            >
+              <div className="text-center">
+                <h1 className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-indigo-600 mb-4 tracking-tighter">Vision OS</h1>
+                <p className="text-[var(--text-muted)] text-xl font-light">Скоро... (Coming Soon)</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <CartSidebar
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          items={cart}
+          onRemove={removeFromCart}
+          lang={lang}
+        />
+
+        <ChatWidget isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} products={PRODUCTS} />
+
+        {/* Floating Chat Button */}
+        <div className="fixed bottom-8 right-8 z-50 group">
+          {!isChatOpen && (
+            <>
+              <span className="absolute top-0 right-0 w-3 h-3 bg-rose-500 rounded-full border-2 border-[var(--bg-main)] z-10 animate-ping"></span>
+              <span className="absolute top-0 right-0 w-3 h-3 bg-rose-500 rounded-full border-2 border-[var(--bg-main)] z-10"></span>
+            </>
+          )}
+
+          <button
+            onClick={() => setIsChatOpen(!isChatOpen)}
+            className={`w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)] ${isChatOpen ? 'bg-[var(--bg-card)] text-[var(--text-main)] rotate-90' : 'bg-[var(--text-main)] text-[var(--bg-main)]'
+              }`}
           >
-            <div className="text-center">
-              <h1 className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-indigo-600 mb-4 tracking-tighter">Vision OS</h1>
-              <p className="text-zinc-500 text-xl font-light">Скоро... (Coming Soon)</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <CartSidebar
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cart}
-        onRemove={removeFromCart}
-      />
-
-      <ChatWidget isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} products={PRODUCTS} />
-
-      {/* Floating Chat Button */}
-      <div className="fixed bottom-8 right-8 z-50 group">
-        {!isChatOpen && (
-          <>
-            <span className="absolute top-0 right-0 w-3 h-3 bg-rose-500 rounded-full border-2 border-[#050505] z-10 animate-ping"></span>
-            <span className="absolute top-0 right-0 w-3 h-3 bg-rose-500 rounded-full border-2 border-[#050505] z-10"></span>
-          </>
-        )}
-
-        <button
-          onClick={() => setIsChatOpen(!isChatOpen)}
-          className={`w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)] ${isChatOpen ? 'bg-zinc-800 text-white rotate-90' : 'bg-white text-black'
-            }`}
-        >
-          {isChatOpen ? <X size={24} /> : <Aperture className="w-6 h-6 animate-spin-slow" />}
-        </button>
+            {isChatOpen ? <X size={24} /> : <div className="relative"><span className="absolute -top-1 -right-1 flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span><span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg></div>}
+          </button>
+        </div>
       </div>
-
     </div>
   );
 };
 
 export default App;
+
