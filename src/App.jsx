@@ -254,7 +254,7 @@ const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => (
         </div>
       </button>
 
-      <div className="flex items-center gap-2 md:gap-4 lg:gap-8 bg-white/5 rounded-full px-2 py-1 relative z-10 border border-white/5">
+      <div className="hidden md:flex items-center gap-2 md:gap-4 lg:gap-8 bg-white/5 rounded-full px-2 py-1 relative z-10 border border-white/5">
         {['home', 'catalog', 'vision'].map((page) => (
           <button
             key={page}
@@ -496,7 +496,7 @@ const CatalogView = ({ onProductSelect }) => {
           <p className="text-zinc-500 max-w-md text-lg">Выбирай лучшее. Каждое устройство здесь — произведение искусства. 🎨</p>
         </div>
 
-        <div className="flex flex-wrap gap-2 justify-end">
+        <div className="flex flex-wrap gap-2 justify-start md:justify-end">
           {categories.map(cat => (
             <button
               key={cat}
@@ -546,7 +546,7 @@ const CatalogView = ({ onProductSelect }) => {
                 </div>
 
                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-3xl font-medium text-white mb-2">{product.name}</h3>
+                  <h3 className="text-xl md:text-3xl font-medium text-white mb-2">{product.name}</h3>
                   <div className="flex items-center justify-between">
                     <p className="text-zinc-400 font-medium">{product.category}</p>
                     <span className="text-lg font-bold text-white">{product.price.toLocaleString()}₽</span>
