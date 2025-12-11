@@ -186,7 +186,7 @@ const PRODUCTS = [
     name: "VR Treadmill",
     category: "Gaming",
     price: 129990,
-    image: "https://images.unsplash.com/photo-1622979135240-511bb527c98f?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/vr-treadmill.png",
     tag: "Ultimate VR",
     description: "Полное погружение в виртуальные миры. Бегите, прыгайте и приседайте в игре."
   },
@@ -195,7 +195,7 @@ const PRODUCTS = [
     name: "Smart Glasses Ray",
     category: "Wearable",
     price: 49990,
-    image: "https://images.unsplash.com/photo-1576024267263-70f1caffd6fe?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/smart-glasses.png",
     tag: "AI Inside",
     description: "Снимайте фото и видео, слушайте музыку и звоните, не доставая телефон."
   },
@@ -204,7 +204,7 @@ const PRODUCTS = [
     name: "RTX 5090",
     category: "Gaming",
     price: 249990,
-    image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/rtx-5090.png",
     tag: "Powerhouse",
     description: "Графический монстр для 8K гейминга и профессионального рендеринга."
   },
@@ -213,7 +213,7 @@ const PRODUCTS = [
     name: "Robot Vacuum S7",
     category: "Home",
     price: 64990,
-    image: "https://images.unsplash.com/photo-1589808825595-53df874f664c?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/robot-vacuum.png",
     tag: "Clean",
     description: "Забудьте об уборке. Мощное всасывание и влажная уборка с искусственным интеллектом."
   }
