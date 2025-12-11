@@ -141,7 +141,7 @@ const PRODUCTS = [
     name: "Smart Ring Oura",
     category: "Wearable",
     price: 34990,
-    image: "https://images.unsplash.com/photo-1628148972580-49658db41e76?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/smart-ring.png",
     tag: "Health",
     description: "Трекинг сна и активности в элегантном кольце. Забудьте о зарядке на неделю."
   },
@@ -150,7 +150,7 @@ const PRODUCTS = [
     name: "Kindle Paper",
     category: "Tablet",
     price: 18990,
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/kindle-reader.png",
     tag: "E-Ink",
     description: "Тысячи книг в одном устройстве. Читайте как с бумаги, даже на ярком солнце."
   },
@@ -159,7 +159,7 @@ const PRODUCTS = [
     name: "Portable SSD 4TB",
     category: "Accessory",
     price: 45990,
-    image: "https://images.unsplash.com/photo-1628557044797-f21a177c37ec?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/portable-ssd.png",
     tag: "Fast",
     description: "Молниеносная передача данных в карманном формате. Защита от падений."
   },
@@ -168,7 +168,7 @@ const PRODUCTS = [
     name: "GaN Charger 140W",
     category: "Accessory",
     price: 9990,
-    image: "https://images.unsplash.com/photo-1583863788434-e58a36d227d6?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/gan-charger.png",
     tag: "Power",
     description: "Один адаптер для всех устройств. Заряжает ноутбук, телефон и часы одновременно."
   },
@@ -177,7 +177,7 @@ const PRODUCTS = [
     name: "Ergo Chair Pro",
     category: "Furniture",
     price: 59990,
-    image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=1000",
+    image: import.meta.env.BASE_URL + "images/ergo-chair.png",
     tag: "Comfort",
     description: "Поддержка спины, которую вы заслуживаете. Идеально для долгих сессий."
   },
