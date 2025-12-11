@@ -496,7 +496,7 @@ const CatalogView = ({ onProductSelect }) => {
           <p className="text-zinc-500 max-w-md text-lg">Выбирай лучшее. Каждое устройство здесь — произведение искусства. 🎨</p>
         </div>
 
-        <div className="flex flex-wrap gap-2 justify-start md:justify-end">
+        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 md:overflow-visible md:flex-wrap md:justify-end w-full md:w-auto -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
           {categories.map(cat => (
             <button
               key={cat}
