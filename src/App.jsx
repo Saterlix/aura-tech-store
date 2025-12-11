@@ -296,9 +296,9 @@ const NoiseBackground = () => (
 
 const AmbientLight = () => (
   <>
-    <div className="fixed top-[-10%] left-[-10%] w-[600px] h-[600px] bg-indigo-900/20 blur-[120px] rounded-full z-0 pointer-events-none" />
-    <div className="fixed bottom-[10%] right-[-5%] w-[500px] h-[500px] bg-rose-900/10 blur-[120px] rounded-full z-0 pointer-events-none" />
-    <div className="fixed top-[40%] left-[40%] w-[800px] h-[800px] bg-blue-500/05 blur-[150px] rounded-full z-0 pointer-events-none mix-blend-screen" />
+    <div className="fixed top-[-10%] left-[-10%] w-[600px] h-[600px] blur-[120px] rounded-full z-0 pointer-events-none transition-colors duration-500" style={{ backgroundColor: 'var(--blob-1)' }} />
+    <div className="fixed bottom-[10%] right-[-5%] w-[500px] h-[500px] blur-[120px] rounded-full z-0 pointer-events-none transition-colors duration-500" style={{ backgroundColor: 'var(--blob-2)' }} />
+    <div className="fixed top-[40%] left-[40%] w-[800px] h-[800px] blur-[150px] rounded-full z-0 pointer-events-none mix-blend-screen transition-colors duration-500" style={{ backgroundColor: 'var(--blob-3)' }} />
   </>
 );
 
@@ -507,7 +507,7 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[0])}
-          className="group md:col-span-4 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
+          className="group md:col-span-4 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-product-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -515,21 +515,21 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
               alt="Vision Pro"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-[var(--bg-main)]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-product-card)] via-[var(--bg-product-card)]/40 to-transparent" />
           </div>
 
           <div className="relative z-10 p-8 h-full flex flex-col justify-between">
             <div className="flex justify-between items-start">
-              <span className="px-3 py-1 rounded-full border border-[var(--text-main)]/20 text-[10px] bg-[var(--bg-main)]/50 backdrop-blur-md uppercase tracking-widest text-[var(--text-main)]">
+              <span className="px-3 py-1 rounded-full border border-[var(--text-product-card)]/20 text-[10px] bg-[var(--bg-product-card)]/50 backdrop-blur-md uppercase tracking-widest text-[var(--text-product-card)]">
                 {t.flagship}
               </span>
-              <div className="w-12 h-12 rounded-full border border-[var(--text-main)]/20 bg-[var(--bg-main)]/30 backdrop-blur-md flex items-center justify-center group-hover:bg-[var(--text-main)] group-hover:text-[var(--bg-main)] transition-all">
+              <div className="w-12 h-12 rounded-full border border-[var(--text-product-card)]/20 bg-[var(--bg-product-card)]/30 backdrop-blur-md flex items-center justify-center group-hover:bg-[var(--text-product-card)] group-hover:text-[var(--bg-product-card)] transition-all">
                 <ArrowUpRight size={20} />
               </div>
             </div>
             <div>
-              <h3 className="text-4xl font-medium text-[var(--text-main)] mb-2 tracking-tight">Vision Pro</h3>
-              <p className="text-[var(--text-muted)]">{lang === 'ru' ? PRODUCTS[0].description : PRODUCTS[0].description_en}</p>
+              <h3 className="text-4xl font-medium text-[var(--text-product-card)] mb-2 tracking-tight">Vision Pro</h3>
+              <p className="text-[var(--text-product-muted)]">{lang === 'ru' ? PRODUCTS[0].description : PRODUCTS[0].description_en}</p>
             </div>
           </div>
         </motion.div>
@@ -538,7 +538,7 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[1])}
-          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
+          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-product-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -546,12 +546,12 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
               alt="Headphones"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-product-card)] via-transparent to-transparent" />
           </div>
 
           <div className="relative z-10 p-8 h-full flex flex-col justify-end">
-            <h3 className="text-2xl font-medium text-[var(--text-main)]">Audio Max</h3>
-            <p className="text-sm text-[var(--text-muted)]">{t.rating}</p>
+            <h3 className="text-2xl font-medium text-[var(--text-product-card)]">Audio Max</h3>
+            <p className="text-sm text-[var(--text-product-muted)]">{t.rating}</p>
           </div>
         </motion.div>
 
@@ -559,7 +559,7 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[2])}
-          className="group md:col-span-2 md:row-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
+          className="group md:col-span-2 md:row-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-product-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -567,7 +567,7 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
               alt="Phone"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-product-card)] via-transparent to-transparent" />
           </div>
 
           <div className="relative z-10 p-8 h-full flex flex-col justify-between">
@@ -576,8 +576,8 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
               <span className="text-xs font-bold text-orange-400 uppercase tracking-widest">{t.bestseller}</span>
             </div>
             <div>
-              <h3 className="text-3xl font-medium text-[var(--text-main)] tracking-tight">iPhone 15 Pro</h3>
-              <p className="text-sm text-[var(--text-muted)] mt-2">Titanium. Perfection.</p>
+              <h3 className="text-3xl font-medium text-[var(--text-product-card)] tracking-tight">iPhone 15 Pro</h3>
+              <p className="text-sm text-[var(--text-product-muted)] mt-2">Titanium. Perfection.</p>
             </div>
           </div>
         </motion.div>
@@ -586,7 +586,7 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[5])}
-          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
+          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-product-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -594,12 +594,12 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
               alt="Drone"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-main)]/20 to-[var(--bg-main)]/80" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-product-card)]/20 to-[var(--bg-product-card)]/80" />
           </div>
           <div className="relative z-10 p-8 h-full flex items-end">
             <div>
-              <h3 className="text-xl font-medium text-[var(--text-main)]">Sky Drone</h3>
-              <p className="text-xs text-[var(--text-muted)]">4K Video</p>
+              <h3 className="text-xl font-medium text-[var(--text-product-card)]">Sky Drone</h3>
+              <p className="text-xs text-[var(--text-product-muted)]">4K Video</p>
             </div>
           </div>
         </motion.div>
@@ -608,7 +608,7 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
         <motion.div
           whileHover={{ scale: 0.99 }}
           onClick={() => onProductSelect(PRODUCTS[6])}
-          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-card)] border border-[var(--text-main)]/10"
+          className="group md:col-span-2 cursor-pointer relative rounded-[2rem] overflow-hidden bg-[var(--bg-product-card)] border border-[var(--text-main)]/10"
         >
           <div className="absolute inset-0">
             <img
@@ -616,14 +616,14 @@ const HomeView = ({ onNavigate, onProductSelect, lang }) => {
               alt="Camera"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)]/90 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-product-card)]/90 to-transparent" />
           </div>
           <div className="relative z-10 p-8 h-full flex items-end justify-between">
             <div>
-              <h3 className="text-xl font-medium text-[var(--text-main)]">Leica M11</h3>
-              <p className="text-xs text-[var(--text-muted)]">Pure Photography</p>
+              <h3 className="text-xl font-medium text-[var(--text-product-card)]">Leica M11</h3>
+              <p className="text-xs text-[var(--text-product-muted)]">Pure Photography</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-[var(--text-main)] text-[var(--bg-main)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+            <div className="w-10 h-10 rounded-full bg-[var(--text-product-card)] text-[var(--bg-product-card)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
               <Plus size={20} />
             </div>
           </div>
@@ -682,7 +682,7 @@ const CatalogView = ({ onProductSelect, lang }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -20 }}
               onClick={() => onProductSelect(product)}
-              className="group cursor-pointer relative h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-[var(--text-main)]/10 bg-[var(--bg-card)]"
+              className="group cursor-pointer relative h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-[var(--text-main)]/10 bg-[var(--bg-product-card)]"
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
@@ -691,25 +691,25 @@ const CatalogView = ({ onProductSelect, lang }) => {
                   alt={product.name}
                   className="w-full h-full object-cover opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-[var(--bg-main)]/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-product-card)] via-[var(--bg-product-card)]/50 to-transparent" />
               </div>
 
               {/* Content Overlay */}
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-between">
                 <div className="flex justify-between items-start">
-                  <span className="px-3 py-1 rounded-full bg-[var(--bg-main)]/40 backdrop-blur-xl border border-[var(--text-main)]/10 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                  <span className="px-3 py-1 rounded-full bg-[var(--bg-product-card)]/40 backdrop-blur-xl border border-[var(--text-product-card)]/10 text-[10px] font-bold uppercase tracking-widest text-[var(--text-product-muted)]">
                     {product.tag}
                   </span>
-                  <button className="w-10 h-10 rounded-full bg-[var(--text-main)]/10 backdrop-blur-md flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-main)] transition-colors transform group-hover:rotate-45 duration-300">
+                  <button className="w-10 h-10 rounded-full bg-[var(--text-product-card)]/10 backdrop-blur-md flex items-center justify-center text-[var(--text-product-card)] hover:bg-[var(--text-product-card)] hover:text-[var(--bg-product-card)] transition-colors transform group-hover:rotate-45 duration-300">
                     <ArrowUpRight size={18} />
                   </button>
                 </div>
 
                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-xl md:text-3xl font-medium text-[var(--text-main)] mb-2">{product.name}</h3>
+                  <h3 className="text-xl md:text-3xl font-medium text-[var(--text-product-card)] mb-2">{product.name}</h3>
                   <div className="flex items-center justify-between">
-                    <p className="text-[var(--text-muted)] font-medium">{product.category}</p>
-                    <span className="text-lg font-bold text-[var(--text-main)]">{product.price.toLocaleString()}₽</span>
+                    <p className="text-[var(--text-product-muted)] font-medium">{product.category}</p>
+                    <span className="text-lg font-bold text-[var(--text-product-card)]">{product.price.toLocaleString()}₽</span>
                   </div>
                 </div>
               </div>

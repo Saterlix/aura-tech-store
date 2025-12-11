@@ -48,19 +48,47 @@
 :root {
   --bg-main: #050505;
   --bg-card: #09090b;
-  /* zinc-950/900-ish */
+  /* zinc-950 */
   --text-main: #ffffff;
   --text-muted: #a1a1aa;
   /* zinc-400 */
+
+  /* Product Cards always dark for premium feel */
+  --bg-product-card: #09090b;
+  --text-product-card: #ffffff;
+  --text-product-muted: #a1a1aa;
+
+  /* Ambient Light Colors (Dark Mode) */
+  --blob-1: rgba(49, 46, 129, 0.2);
+  /* indigo-900/20 */
+  --blob-2: rgba(136, 19, 55, 0.1);
+  /* rose-900/10 */
+  --blob-3: rgba(59, 130, 246, 0.05);
+  /* blue-500/05 */
 }
 
 [data-theme='light'] {
-  --bg-main: #e4e4e7;
-  /* zinc-200 */
-  --bg-card: #ffffff;
-  --text-main: #000000;
-  --text-muted: #52525b;
-  /* zinc-600 */
+  --bg-main: #F2F4F8;
+  /* Soft premium grey */
+  --bg-card: #FFFFFF;
+  /* White panels for navbar/sidebar */
+  --text-main: #18181b;
+  /* zinc-900 */
+  --text-muted: #71717a;
+  /* zinc-500 */
+
+  /* Keep products dark like the reference image for contrast */
+  --bg-product-card: #18181b;
+  --text-product-card: #ffffff;
+  --text-product-muted: #a1a1aa;
+
+  /* Ambient Light Colors (Light Mode) */
+  --blob-1: rgba(99, 102, 241, 0.15);
+  /* indigo-500/15 */
+  --blob-2: rgba(244, 63, 94, 0.15);
+  /* rose-500/15 */
+  --blob-3: rgba(14, 165, 233, 0.15);
+  /* sky-500/15 */
 }
 
 html,
@@ -78,7 +106,7 @@ body {
 body {
   background: var(--bg-main);
   color: var(--text-main);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 #root {
