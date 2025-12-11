@@ -237,69 +237,128 @@ const AmbientLight = () => (
   </>
 );
 
-const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => (
-  <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[1600px]">
-    <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-8 py-3 md:py-5 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden">
+const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-      {/* Glossy effect */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+  return (
+    <>
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[1600px]">
+        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-4 md:px-8 py-3 md:py-5 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden">
 
-      <button
-        onClick={() => activePage === 'product' ? onNavigate('catalog') : onNavigate('home')}
-        className="flex items-center gap-3 group relative z-10"
-      >
-        <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${activePage === 'product' ? 'bg-white text-black rotate-0' : 'bg-white text-black group-hover:rotate-180'}`}>
-          {activePage === 'product' ? <ChevronLeft size={24} /> : <Aperture size={22} />}
-        </div>
-        <div className="flex flex-col items-start leading-none hidden sm:flex">
-          <span className="text-lg font-bold tracking-[0.2em] text-white uppercase transition-all duration-300">
-            {activePage === 'product' ? 'Back' : 'Aura'}
-          </span>
-          <span className="text-[9px] text-zinc-400 font-medium tracking-widest">
-            {activePage === 'product' ? 'TO CATALOG' : 'STORE'}
-          </span>
-        </div>
-      </button>
+          {/* Glossy effect */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
 
-      <div className="hidden md:flex items-center gap-2 md:gap-4 lg:gap-8 bg-white/5 rounded-full px-2 py-1 relative z-10 border border-white/5">
-        {['home', 'catalog', 'vision'].map((page) => (
+          {/* Back/Logo Button */}
           <button
-            key={page}
-            onClick={() => onNavigate(page)}
-            className={`px-6 py-2 rounded-full text-xs font-bold transition-all duration-300 uppercase tracking-widest relative overflow-hidden group ${activePage === page ? 'text-black' : 'text-zinc-400 hover:text-white'
-              }`}
+            onClick={() => activePage === 'product' ? onNavigate('catalog') : onNavigate('home')}
+            className="flex items-center gap-3 group relative z-10"
           >
-            {activePage === page && (
-              <motion.div
-                layoutId="nav-bg"
-                className="absolute inset-0 bg-white"
-                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-              />
-            )}
-            <span className="relative z-10">{page === 'home' ? 'Главная' : page === 'catalog' ? 'Каталог' : 'Вижн'}</span>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${activePage === 'product' ? 'bg-white text-black rotate-0' : 'bg-white text-black group-hover:rotate-180'}`}>
+              {activePage === 'product' ? <ChevronLeft size={24} /> : <Aperture size={22} />}
+            </div>
+            <div className="flex flex-col items-start leading-none hidden sm:flex">
+              <span className="text-lg font-bold tracking-[0.2em] text-white uppercase transition-all duration-300">
+                {activePage === 'product' ? 'Back' : 'Aura'}
+              </span>
+              <span className="text-lg text-zinc-400 font-medium tracking-widest text-[9px]">
+                {activePage === 'product' ? 'TO CATALOG' : 'STORE'}
+              </span>
+            </div>
           </button>
-        ))}
-      </div>
 
-      <div className="flex items-center gap-4 relative z-10">
-        <button
-          onClick={openCart}
-          className="relative group w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
-        >
-          <ShoppingBag className="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors" />
-          {cartCount > 0 && (
-            <motion.div
-              initial={{ scale: 0 }} animate={{ scale: 1 }}
-              className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center border-2 border-[#0a0a0a]"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-2 md:gap-4 lg:gap-8 bg-white/5 rounded-full px-2 py-1 relative z-10 border border-white/5">
+            {['home', 'catalog', 'vision'].map((page) => (
+              <button
+                key={page}
+                onClick={() => onNavigate(page)}
+                className={`px-6 py-2 rounded-full text-xs font-bold transition-all duration-300 uppercase tracking-widest relative overflow-hidden group ${activePage === page ? 'text-black' : 'text-zinc-400 hover:text-white'
+                  }`}
+              >
+                {activePage === page && (
+                  <motion.div
+                    layoutId="nav-bg"
+                    className="absolute inset-0 bg-white"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{page === 'home' ? 'Главная' : page === 'catalog' ? 'Каталог' : 'Вижн'}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3 relative z-10">
+            {/* Cart Button */}
+            <button
+              onClick={openCart}
+              className="relative group w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
             >
-              <span className="text-[10px] font-bold text-white">{cartCount}</span>
-            </motion.div>
-          )}
-        </button>
-      </div>
-    </div>
-  </nav>
-);
+              <ShoppingBag className="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors" />
+              {cartCount > 0 && (
+                <motion.div
+                  initial={{ scale: 0 }} animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center border-2 border-[#0a0a0a]"
+                >
+                  <span className="text-[10px] font-bold text-white">{cartCount}</span>
+                </motion.div>
+              )}
+            </button>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden w-12 h-12 flex items-center justify-center rounded-full bg-white text-black transition-all hover:scale-105 active:scale-95"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center space-y-8"
+          >
+            {['home', 'catalog', 'vision', 'about', 'support'].map((item, idx) => (
+              <motion.button
+                key={item}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + idx * 0.1 }}
+                onClick={() => {
+                  if (['home', 'catalog', 'vision'].includes(item)) {
+                    onNavigate(item);
+                  }
+                  setIsMenuOpen(false);
+                }}
+                className={`text-4xl font-bold uppercase tracking-tight ${activePage === item ? 'text-white' : 'text-zinc-500 hover:text-white'
+                  }`}
+              >
+                {item === 'home' ? 'Главная' :
+                  item === 'catalog' ? 'Каталог' :
+                    item === 'vision' ? 'Вижн' : item}
+              </motion.button>
+            ))}
+
+            <div className="absolute bottom-12 flex gap-6">
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-500">
+                <span className="text-xs">IG</span>
+              </div>
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-zinc-500">
+                <span className="text-xs">TW</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
 
 /* --- Views --- */
 
