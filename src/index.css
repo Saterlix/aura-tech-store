@@ -37,17 +37,36 @@ body {
 }
 
 /* Global Scrollbar Hide - Aggressive */
-*,
-html,
-body {
+* {
   -ms-overflow-style: none !important;
   /* IE and Edge */
   scrollbar-width: none !important;
   /* Firefox */
 }
 
-*::-webkit-scrollbar,
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
   display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  /* Disable scroll on body/html */
+  height: 100%;
+  width: 100%;
+  overscroll-behavior: none;
+  /* Prevent bounce effect */
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto !important;
+  /* Enable scroll on root only */
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scroll on iOS */
 }
