@@ -244,13 +244,20 @@ const Navbar = ({ cartCount, onNavigate, activePage, openCart }) => (
       {/* Glossy effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
 
-      <button onClick={() => onNavigate('home')} className="flex items-center gap-3 group relative z-10">
-        <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 shadow-lg">
-          <Aperture size={22} className="text-black" />
+      <button
+        onClick={() => activePage === 'product' ? onNavigate('catalog') : onNavigate('home')}
+        className="flex items-center gap-3 group relative z-10"
+      >
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${activePage === 'product' ? 'bg-white text-black rotate-0' : 'bg-white text-black group-hover:rotate-180'}`}>
+          {activePage === 'product' ? <ChevronLeft size={24} /> : <Aperture size={22} />}
         </div>
         <div className="flex flex-col items-start leading-none hidden sm:flex">
-          <span className="text-lg font-bold tracking-[0.2em] text-white uppercase">Aura</span>
-          <span className="text-[9px] text-zinc-400 font-medium tracking-widest">STORE</span>
+          <span className="text-lg font-bold tracking-[0.2em] text-white uppercase transition-all duration-300">
+            {activePage === 'product' ? 'Back' : 'Aura'}
+          </span>
+          <span className="text-[9px] text-zinc-400 font-medium tracking-widest">
+            {activePage === 'product' ? 'TO CATALOG' : 'STORE'}
+          </span>
         </div>
       </button>
 
@@ -569,15 +576,7 @@ const ProductDetail = ({ product, onBack, onAddToCart }) => {
       exit={{ opacity: 0 }}
       className="pt-32 pb-20 px-4 md:px-8 max-w-[1600px] mx-auto w-full relative z-10 min-h-screen"
     >
-      <button
-        onClick={onBack}
-        className="absolute top-24 left-6 lg:left-0 flex items-center gap-2 text-zinc-500 hover:text-white transition-colors z-20 group"
-      >
-        <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
-          <ChevronLeft size={16} />
-        </div>
-        <span className="text-sm font-bold uppercase tracking-widest">Назад</span>
-      </button>
+
 
       <div className="flex flex-col lg:flex-row gap-12 items-center h-full">
         {/* Hero Image Section */}
